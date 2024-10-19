@@ -1,5 +1,5 @@
 # 🎬 CINEVERSE 🎬
-![Previu](https://i.ibb.co/3Bss7Xs/cineverse.jpg)
+![Previu](https://i.ibb.co/K77h0bQ/cineversees.png)
 
 Welcome to **Cineverse**, a responsive web platform designed to offer a seamless experience across all devices! Utilizing The Movie Database (TMDb) API, Cineverse presents an interactive gallery of movies organized by categories.
 

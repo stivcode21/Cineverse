@@ -1,24 +1,31 @@
-import React, { useState } from 'react';
-import Navbar from './Navbar';
-import Banner from './Banner';
-import MovieGrid from './MovieGrid';
-import Footer from './Footer';
-
+import { useState } from "react";
+import Navbar from "@/components/Navbar";
+import Banner from "@/components/Banner";
+import MovieGrid from "@/components/MovieGrid";
+import Footer from "@/components/Footer";
+import SeriesGrid from "./components/SeriesGrid";
 
 function App() {
-  const [selectedTag, setSelectedTag] = useState("Todas"); // Estado para la etiqueta seleccionada
-  const API_KEY = '07d20aa2a1eb5c765dd8e8806d94499f'; // Reemplaza con tu API Key
+  const [selectedMovie, setSelectedMovie] = useState("Todas"); // Estado para la etiqueta seleccionada
+  const [selectedSerie, setSelectedSerie] = useState("Todas"); // Estado para la etiqueta seleccionada de series
 
   return (
     <>
-      <div className="bg-[#070607] relative w-full h-full">
+      <div className="bg-[#070607] relative w-full h-full overflow-auto scroll-smooth">
         <Navbar />
-        <Banner apikey={API_KEY} selectedTag={selectedTag} />
-        <MovieGrid apikey={API_KEY} setSelectedTag={setSelectedTag} selectedTag={selectedTag} />
+        <Banner selectedTag={selectedMovie} />
+        <MovieGrid
+          setSelectedMovie={setSelectedMovie}
+          selectedMovie={selectedMovie}
+        />
+        <SeriesGrid
+          selectedSerie={selectedSerie}
+          setSelectedSerie={setSelectedSerie}
+        />
         <Footer />
       </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -11,7 +11,7 @@ function App() {
 
   return (
     <>
-      <div className="bg-[#070607] relative w-full h-full overflow-auto scroll-smooth">
+      <div className="bg-[#000000] font-Bricolage relative w-full h-full ">
         <Navbar />
         <Banner selectedTag={selectedMovie} />
         <MovieGrid

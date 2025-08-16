@@ -1,0 +1,150 @@
+.accordionItem {
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  position: relative; /* necesario para que description absolute se posicione aquí */
+  background: #051b32;
+  border-radius: 10px;
+  border: 1px solid #063767;
+  overflow: visible; /* para que se vea fuera del contenedor */
+}
+
+.accordionItem::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-40%) scaleX(0.5);
+  width: 100%;
+  height: 100%;
+  background: #041e3a;
+  border-radius: 10px;
+  z-index: 0;
+  opacity: 0;
+  transition: transform 0.2s cubic-bezier(0.215, 0.61, 0.355, 1),
+    opacity 0.1s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.accordionItem:hover::before {
+  transform: translateX(-50%) scaleX(1);
+  opacity: 1;
+}
+
+.accordionItem.open:hover::before {
+  opacity: 0;
+}
+
+/* Header */
+.accordionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  padding-left: 16px;
+  z-index: 5;
+
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.accordionHeader:hover {
+  opacity: 0.9;
+}
+
+accordionHeader:hover {
+  transition: transform 0.1s ease-in-out;
+  font-weight: 800;
+}
+
+.accordionHeader h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+}
+
+.arrow {
+  width: 50px;
+  height: 50px;
+  display: grid;
+  place-items: center;
+}
+
+.open {
+  border-radius: 10px 10px 0 0;
+  transition: all 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.accordionHeader:active .arrow svg {
+  transform: scale(0.8);
+  transition: transform 0.1s ease-in-out;
+  color: #ffffff;
+}
+
+.accordionHeader:hover .arrow svg {
+  stroke-width: 3px;
+  color: #00b3fa;
+  transition: transform 0.2s ease-in-out;
+}
+
+.arrow svg {
+  transition: transform 0.2s;
+  color: #fff;
+}
+
+.arrow {
+  display: grid;
+  place-items: center;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.accordionItem.open .arrow {
+  transform: rotate(180deg);
+  opacity: 1;
+}
+
+/* Descripción absolute con animación */
+.description {
+  position: absolute; /* se abre sobre el layout */
+  top: 90%; /* justo debajo del header */
+  left: -0.5px;
+  width: 150px;
+  background: linear-gradient(160deg, #051b32 53%, rgba(11, 21, 35, 1) 82%);
+  border-right: 1px solid #063767;
+  border-left: 1px solid #063767;
+  border-bottom: 1px solid #063767;
+  border-radius: 0 0 10px 10px;
+  opacity: 0;
+  transform: translateY(-20px);
+  pointer-events: none; /* no interactuable cuando está cerrado */
+  transition: all 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+  z-index: 10;
+}
+
+/* Cuando está abierto */
+.description.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto; /* ahora se puede interactuar */
+}
+
+/* Contenido interno */
+.box {
+  padding: 10px 15px;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+}
+
+.description.show .box {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .accordionHeader h3 {
+    font-size: 18px;
+  }
+  .description {
+    padding: 10px 10px;
+  }
+}

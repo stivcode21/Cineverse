@@ -27,7 +27,7 @@ const Navbar = () => {
   const [NavbarOpen, setNavbarOpen] = useState(false); //se inicia en falso
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-black">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-black shadow-md shadow-black">
       <div className="flex flex-wrap items-center justify-end md:justify-center w-full px-8 md:px-16 py-2">
         <a
           href={"#main"}
@@ -49,11 +49,8 @@ const Navbar = () => {
               </svg>
             </div>
           </div>
-          <h1
-            className="text-4xl font-bold text-blue-500"
-            style={{ fontFamily: "Bebas Neue" }}
-          >
-            cineverse
+          <h1 className="text-4xl font-bol font-Anton bg-custom-gradient bg-clip-text text-transparent">
+            CINEVERSE
           </h1>
           {
             // si el menu no esta abierto, que boton muestra
@@ -78,11 +75,8 @@ const Navbar = () => {
         <div className="menu hidden md:block md:w-full" id="navbar">
           <ul className="flex md:flex-row justify-center md:space-x-8 relative mt-0">
             <li className="flex items-center">
-              <h1
-                className="text-4xl font-bold absolute left-0 text-blue-500"
-                style={{ fontFamily: "Bebas Neue" }}
-              >
-                cineverse
+              <h1 className="text-4xl font-bold absolute left-0 font-Anton bg-custom-gradient bg-clip-text text-transparent">
+                CINEVERSE
               </h1>
             </li>
             {

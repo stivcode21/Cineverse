@@ -3,7 +3,7 @@ const NavLink = ({ href, title }) => {
   return (
     <a
       href={href}
-      className="block py-2 text-white sm:text-xl rounded hover:text-blue-500"
+      className="block py-2 text-white sm:text-xl rounded font-bold hover:text-[#00B3FA] active:scale-90 transition-all ease-in-out"
     >
       {title}
     </a>

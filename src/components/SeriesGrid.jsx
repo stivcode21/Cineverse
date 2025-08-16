@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { tmdbBaseUrl, tmdbApiKey } from "../../services/tmdb";
 import Filter from "./Filter";
+import ExpandableList from "../utils/expandableList/ExpandableList";
+import SplitText from "@/utils/splitText/SplitText";
 
 const SeriesGrid = ({ setSelectedSerie, selectedSerie }) => {
   const [series, setMovies] = useState([]);
@@ -42,14 +44,38 @@ const SeriesGrid = ({ setSelectedSerie, selectedSerie }) => {
 
   return (
     <div id="series" className="scroll-mt-20">
-      <Filter
-        selectedTag={selectedSerie}
-        setSelectedTag={setSelectedSerie}
-        role={"series"}
-      />
+      <div className="flex justify-between items-center px-8 md:px-16">
+        <h1>
+          <SplitText
+            text="SERIES"
+            className="font-Anton text-5xl md:text-6xl text-center pt-4 pb-8"
+            delay={100}
+            duration={0.6}
+            ease="power3.out"
+            splitType="chars"
+            from={{ opacity: 0, y: 40 }}
+            to={{ opacity: 1, y: 0 }}
+            threshold={0.1}
+            rootMargin="-100px"
+            textAlign="center"
+          />
+        </h1>
+
+        <ExpandableList
+          title={"Categoria"}
+          index={1}
+          description={
+            <Filter
+              selectedTag={selectedSerie}
+              setSelectedTag={setSelectedSerie}
+              role={"series"}
+            />
+          }
+        />
+      </div>
 
       {/* Mostrar las películas en una cuadrícula */}
-      <div className="grid grid-cols-3 px-8 md:px-16 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7 gap-4 lg:gap-6 bg-black py-5">
+      <div className="grid grid-cols-3 px-8 md:px-16 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7 gap-4 lg:gap-6 py-5">
         {series.map((movie, i) => (
           <div
             key={i}

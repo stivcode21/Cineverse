@@ -62,7 +62,7 @@ const Banner = ({ apikey, selectedTag }) => {
   return (
     <div
       id="inicio"
-      className="banner w-full h-[640px] flex justify-center items-center relative pt-[20px]"
+      className="banner w-full h-[680px] flex justify-center items-center relative pt-[20px]"
     >
       {loading ? (
         <Loader />
@@ -71,7 +71,7 @@ const Banner = ({ apikey, selectedTag }) => {
           src={banner}
           alt="Movie Banner"
           width="100%"
-          className="h-[600px] object-cover bg-cover"
+          className="h-[600px] object-cover bg-cover mt-6"
         />
       )}
     </div>

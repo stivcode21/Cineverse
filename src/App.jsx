@@ -1,9 +1,9 @@
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Banner from "@/components/Banner";
-import MovieGrid from "@/components/MovieGrid";
 import Footer from "@/components/Footer";
-import SeriesGrid from "./components/SeriesGrid";
+import MoviesSection from "./components/MoviesSection";
+import SeriesSection from "./components/SeriesSection";
 
 function App() {
   const [selectedMovie, setSelectedMovie] = useState("Todas"); // Estado para la etiqueta seleccionada
@@ -11,14 +11,14 @@ function App() {
 
   return (
     <>
-      <div className="bg-[#000000] font-Bricolage relative w-full h-full ">
+      <div className="font-Bricolage relative w-full h-full ">
         <Navbar />
         <Banner selectedTag={selectedMovie} />
-        <MovieGrid
+        <MoviesSection
           setSelectedMovie={setSelectedMovie}
           selectedMovie={selectedMovie}
         />
-        <SeriesGrid
+        <SeriesSection
           selectedSerie={selectedSerie}
           setSelectedSerie={setSelectedSerie}
         />

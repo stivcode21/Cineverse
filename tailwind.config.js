@@ -11,6 +11,10 @@ export default {
       backgroundImage: {
         "custom-gradient":
           "linear-gradient(360deg, #00B3FA 0%, #051b32 10%, #00B3FA 70%)",
+        "radial-darkblue":
+          "radial-gradient(circle, rgba(0,0,0,0) 50%, rgba(6,55,103,1) 95%)",
+        "black-shadow":
+          "linear-gradient(180deg,rgba(11, 21, 35, 1) 0%, rgba(0, 0, 0, 0) 50%, rgba(11, 21, 35, 1) 75%)",
       },
       textShadow: {
         default: "0 1px 3px rgba(0, 0, 0, 0.5)",

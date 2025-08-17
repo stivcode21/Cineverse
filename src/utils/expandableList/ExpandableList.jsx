@@ -1,25 +1,16 @@
-import { useState } from "react";
 import styles from "./ExpandableList.module.css";
 import { ChevronDown } from "lucide-react";
 
-const ExpandableList = ({ title, description, index }) => {
-  const [openItem, setOpenItem] = useState(null);
-
-  const handleAccordion = (index) => {
-    setOpenItem(openItem === index ? null : index);
-  };
-
+const ExpandableList = ({ title, description, isOpen, onToggle }) => {
   return (
     <section className={styles.accordion}>
       <article
-        className={`${styles.accordionItem} ${
-          openItem === index ? styles.open : ""
-        }`}
+        className={`${styles.accordionItem} ${isOpen ? styles.open : ""}`}
       >
         <button
           className={styles.accordionHeader}
-          onClick={() => handleAccordion(index)}
-          aria-expanded={openItem === index}
+          onClick={onToggle}
+          aria-expanded={isOpen}
         >
           <span>
             <h3>{title}</h3>
@@ -30,10 +21,8 @@ const ExpandableList = ({ title, description, index }) => {
         </button>
 
         <div
-          className={`${styles.description} ${
-            openItem === index ? styles.show : ""
-          }`}
-          aria-hidden={openItem !== index}
+          className={`${styles.description} ${isOpen ? styles.show : ""}`}
+          aria-hidden={!isOpen}
         >
           <div className={styles.box}>{description}</div>
         </div>

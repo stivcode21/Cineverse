@@ -11,7 +11,7 @@ function App() {
 
   return (
     <>
-      <div className="font-Bricolage relative w-full h-full ">
+      <div className="font-Bricolage relative">
         <Navbar />
         <Banner selectedTag={selectedMovie} />
         <MoviesSection

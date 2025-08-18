@@ -11,8 +11,8 @@ const Filter = ({ selectedTag, setSelectedTag, role, closeList }) => {
 
   return (
     <div className="flex flex-col justify-center items-center gap-2 pb-2">
-      {Tags.map((tag) => (
-        <div className="group">
+      {Tags.map((tag, i) => (
+        <div className="group" key={i}>
           <button
             key={tag}
             className={` my-[1px] text-[12px] md:text-[14px] rounded-sm font-medium uppercase hover:text-[#00B3FA] hover:scale-105 transition-all duration-[0.3ms] ease-in-out ${

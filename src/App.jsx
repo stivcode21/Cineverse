@@ -13,7 +13,7 @@ function App() {
     <>
       <div className="font-Bricolage relative">
         <Navbar />
-        <Banner selectedTag={selectedMovie} />
+        <Banner />
         <MoviesSection
           setSelectedMovie={setSelectedMovie}
           selectedMovie={selectedMovie}

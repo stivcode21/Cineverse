@@ -2,62 +2,54 @@ import { useEffect, useState } from "react";
 import { tmdbBaseUrl, tmdbApiKey } from "../../services/tmdb";
 import Loader from "@/utils/loader/Loader";
 
-// Componente Banner que muestra el banner de una película
-const Banner = ({ apikey, selectedTag }) => {
-  const [banner, setBanner] = useState(""); // Estado para almacenar la URL del banner
-  const [loading, setLoading] = useState(false);
+const Banner = () => {
+  const [movies, setMovies] = useState([]); // Lista de películas populares
+  const [currentBanner, setCurrentBanner] = useState(null); // Banner actual
+  const [loading, setLoading] = useState(true);
 
-  // Mapa de categorías a IDs de películas
-  const categoryIds = {
-    Todas: 0, // Usar 0 para todas las películas populares
-    Terror: 27,
-    Comedia: 35,
-    Romance: 10749,
-    Infantil: 16,
-  };
-
-  // Función para obtener el ID de la película según la categoría
-  const getRandomMovieId = async (categoryId) => {
-    const apiUrl =
-      categoryId === 0
-        ? `${tmdbBaseUrl}/movie/popular?api_key=${tmdbApiKey}&language=es-CO&page=1`
-        : `${tmdbBaseUrl}/discover/movie?api_key=${tmdbApiKey}&language=es-CO&sort_by=popularity.desc&with_genres=${categoryId}&page=1`;
-
-    try {
-      const response = await fetch(apiUrl); // Obtener películas de la API
-      const data = await response.json();
-      const randomMovie =
-        data.results[Math.floor(Math.random() * data.results.length)]; // Elegir una película aleatoria de la lista
-      return randomMovie.id; // Retornar el ID de la película seleccionada
-    } catch (error) {
-      console.error("Error fetching movie:", error); // Manejar errores
-      return null; // Retornar null en caso de error
-    }
-  };
-
+  // Cargar las películas populares
   useEffect(() => {
-    const fetchBanner = async () => {
-      setLoading(true); // Iniciar el estado de carga
-      const categoryId = categoryIds[selectedTag]; // Obtener el ID de la categoría
-      const movieId = await getRandomMovieId(categoryId); // Obtener un ID de película aleatorio segun la categoria que este
-      if (movieId) {
-        const movieUrl = `${tmdbBaseUrl}/movie/${movieId}?api_key=${tmdbApiKey}`; // URL para obtener detalles de la película
-        try {
-          const response = await fetch(movieUrl); // Hacer la solicitud a la API
-          const data = await response.json(); // Convertir la respuesta a JSON
-          if (data.backdrop_path) {
-            const backdropPath = data.backdrop_path; // Obtener la ruta del banner
-            setBanner(`https://image.tmdb.org/t/p/original${backdropPath}`); // Guardar la URL completa del banner
-          }
-        } catch (error) {
-          console.error("Error fetching movie details:", error); // Manejar errores
+    const fetchMovies = async () => {
+      setLoading(true);
+      try {
+        const response = await fetch(
+          `${tmdbBaseUrl}/movie/popular?api_key=${tmdbApiKey}&language=es-CO&page=1`
+        );
+        const data = await response.json();
+        setMovies(data.results);
+        if (data.results?.length > 0) {
+          // Mostrar un banner inicial
+          const randomMovie =
+            data.results[Math.floor(Math.random() * data.results.length)];
+          setCurrentBanner(
+            `https://image.tmdb.org/t/p/original${randomMovie.backdrop_path}`
+          );
         }
+      } catch (error) {
+        console.error("Error fetching movies:", error);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false); // Finalizar el estado de carga
     };
 
-    fetchBanner();
-  }, [selectedTag, apikey]); // Ejecutar cada vez que cambie selectedTag o apikey
+    fetchMovies();
+  }, []);
+
+  // Cambiar el banner cada 9 segundos
+  useEffect(() => {
+    if (movies.length === 0) return;
+
+    const interval = setInterval(() => {
+      const randomMovie = movies[Math.floor(Math.random() * movies.length)];
+      if (randomMovie?.backdrop_path) {
+        setCurrentBanner(
+          `https://image.tmdb.org/t/p/original${randomMovie.backdrop_path}`
+        );
+      }
+    }, 9000);
+
+    return () => clearInterval(interval);
+  }, [movies]);
 
   return (
     <div
@@ -68,10 +60,10 @@ const Banner = ({ apikey, selectedTag }) => {
         <Loader />
       ) : (
         <img
-          src={banner}
+          src={currentBanner}
           alt="Movie Banner"
           width="100%"
-          className="h-[600px] object-cover bg-cover mt-6"
+          className="h-[600px] object-cover bg-cover mt-6 transition-opacity duration-75 ease-in-out"
         />
       )}
     </div>

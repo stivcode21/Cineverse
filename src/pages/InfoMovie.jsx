@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { tmdbBaseUrl, tmdbApiKey } from "../../services/tmdb";
 import Loader from "@/utils/loader/Loader";
 import { useParams } from "react-router-dom";
-import Duration from "../components/Duration";
+import Duration from "@/components/Duration";
 import { List, Play } from "lucide-react";
 
 const InfoMovie = () => {

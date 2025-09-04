@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://i.postimg.cc/G37FRv2q/CINEVERSE-3.webp" alt="Cineverse Preview" width="800" height="500" />
+  <img src="https://i.postimg.cc/G37FRv2q/CINEVERSE-3.webp" alt="Cineverse Preview" width="700" height="500" />
 </p>
 
 <div align="center">
